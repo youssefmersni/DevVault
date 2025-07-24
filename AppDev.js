@@ -44,7 +44,13 @@ app.get('/', (req, res) => {
   res.render('home'); // views/home.ejs
 });
 
+app.get('/login', (req, res) => {
+  res.render('login');
+});
 
+app.get('/register', (req, res) => {
+  res.render('register');
+});
 app.use(flash());
 
 app.use((req, res, next) => {
@@ -54,7 +60,11 @@ app.use((req, res, next) => {
   };
   res.locals.user = req.session.user || null;
   next();
-})
+});
+
+
+
+
 // Mount user routes-TEST
 app.use('/users', userRoutes);
 app.use('/works', workRoutes);

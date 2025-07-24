@@ -10,12 +10,8 @@
 <body>
   <div class="form-container">
     <h1><i class="fas fa-sign-in-alt"></i> Login</h1>
-    <% if (messages.error_msg && messages.error_msg.length > 0) { %>
-      <div class="message error"><i class="fas fa-exclamation-circle"></i> <%= messages.error_msg %></div>
-    <% } %>
-    <% if (messages.success_msg && messages.success_msg.length > 0) { %>
-      <div class="message success"><i class="fas fa-check-circle"></i> <%= messages.success_msg %></div>
-    <% } %>
+    
+    
     <form action="/users/login" method="POST">
       <div class="form-group">
         <label for="email"><i class="fas fa-envelope"></i> Email:</label>
