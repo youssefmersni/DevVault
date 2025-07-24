@@ -41,7 +41,7 @@ app.use(session({
 }))
 //hneeeeeee
 app.get('/', (req, res) => {
-  res.send(' Your app is live and working!');
+  res.render('home'); // views/home.ejs
 });
 
 
