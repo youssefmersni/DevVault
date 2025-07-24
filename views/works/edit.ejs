@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Work</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="form-container">
+    <h1><i class="fas fa-edit"></i> Edit Work</h1>
+    <% if (messages.error_msg && messages.error_msg.length > 0) { %>
+      <div class="message error"><i class="fas fa-exclamation-circle"></i> <%= messages.error_msg %></div>
+    <% } %>
+    <% if (messages.success_msg && messages.success_msg.length > 0) { %>
+      <div class="message success"><i class="fas fa-check-circle"></i> <%= messages.success_msg %></div>
+    <% } %>
+    <form action="/works/<%= work._id %>?_method=PUT" method="POST">
+      <div class="form-group">
+        <label for="title"><i class="fas fa-heading"></i> Title:</label>
+        <input type="text" name="title" id="title" value="<%= work.title %>" required aria-required="true">
+      </div>
+      <div class="form-group">
+        <label for="description"><i class="fas fa-align-left"></i> Description:</label>
+        <textarea name="description" id="description" required aria-required="true"><%= work.description %></textarea>
+      </div>
+      <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Update Work</button>
+    </form>
+    <a href="/users/dashboard" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+
+    <title>Dashboard</title>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Welcome, <%= user.username %>!</h1>
+      <form action="/users/logout" method="POST">
+        <button type="submit" class="logout-btn" aria-label="Logout">Logout</button>
+      </form>
+    </header>
+    <main class="main">
+      <h2>Your Tasks</h2>
+      <a href="/works/new" class="add-task-btn"><i class="fas fa-plus"></i> Add New Work</a>
+      <% if (messages.success_msg && messages.success_msg.length > 0) { %>
+        <div class="message success"><i class="fas fa-check-circle"></i> <%= messages.success_msg %></div>
+      <% } %>
+      <% if (messages.error_msg && messages.error_msg.length > 0) { %>
+        <div class="message error"><i class="fas fa-exclamation-circle"></i> <%= messages.error_msg %></div>
+      <% } %>
+      <% if (works.length === 0) { %>
+        <p>You have no tasks yet.</p>
+      <% } else { %>
+        <ul class="task-list">
+          <% works.forEach(work => { %>
+            <li class="task-item">
+              <div class="task-info">
+                <form action="/works/<%= work._id %>/toggle" method="POST" class="toggle-form">
+                  <button type="submit" class="task-title-btn <%= work.completed ? 'done' : 'pending' %>">
+                    <i class="fas fa-<%= work.completed ? 'check-circle' : 'circle' %>"></i>
+                    <span><%= work.title %></span>
+                  </button>
+                </form>
+                <p class="task-description"><%= work.description %></p>
+              </div>
+              <div class="task-actions">
+                <a href="/works/<%= work._id %>/edit" class="edit-link"><i class="fas fa-edit"></i> Edit</a>
+                <form action="/works/<%= work._id %>?_method=DELETE" method="POST" style="display:inline;">
+                 <button type="submit" class="delete-btn" onclick="return confirm('Are you sure?')">
+                     <i class="fas fa-trash"></i> Delete
+                </button>
+                </form>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </main>
+  </div>
+</body>
+</html>
